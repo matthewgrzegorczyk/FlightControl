@@ -4,18 +4,39 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.io.File;
 
 /**
- * Created by ShataN_2 on 10/06/2016.
+ * Radar`s MainFrame.
  */
 public class RadarGUI extends JFrame {
+    /**
+     * Map file input.
+     */
     private JFileChooser mapInput;
+
+    /**
+     * Menu toolbar.
+     */
     private JMenuBar menuBar;
+
+    /**
+     * Menus
+     */
     private JMenu fileMenu, helpMenu;
+    /**
+     * Menu items.
+     */
     private JMenuItem exit, about, map;
+    /**
+     * Radar window width and height.
+     */
     private int rWidth, rHeight;
-    private String title;
+
+    /**
+     * Radar background.
+     */
+    private File radarBackground;
 
     RadarGUI()
     {
@@ -34,7 +55,7 @@ public class RadarGUI extends JFrame {
         this.setLocationRelativeTo(null);
 
         // Makes app close when click the exit button.
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.createMenuToolbar();
         this.setVisible(true);
@@ -48,14 +69,8 @@ public class RadarGUI extends JFrame {
         this.fileMenu.setMnemonic(KeyEvent.VK_F);
 
         this.map = new JMenuItem("Load Map");
-        this.map.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(e.getSource() == map) {
-                    // Display filechooser popup and handle the file load.
-                }
-            }
-        });
+        MapInputListener mapInputListener = new MapInputListener(this);
+        this.map.addActionListener(mapInputListener);
 
 
         this.exit = new JMenuItem("Exit");
@@ -82,5 +97,29 @@ public class RadarGUI extends JFrame {
 
         // Registers MenuBar.
         this.setJMenuBar(this.menuBar);
+    }
+
+    public void setRadarBackground(File map) {
+        this.radarBackground = map;
+    }
+}
+
+class MapInputListener implements ActionListener {
+
+    private File map;
+    private JFileChooser mapInput;
+    private RadarGUI radarFrame;
+
+    public MapInputListener(RadarGUI myFrame) {
+        this.radarFrame = myFrame;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == mapInput) {
+            mapInput = new JFileChooser();
+            mapInput.showOpenDialog(this.radarFrame);
+            this.radarFrame.setRadarBackground(mapInput.getSelectedFile());
+        }
     }
 }
