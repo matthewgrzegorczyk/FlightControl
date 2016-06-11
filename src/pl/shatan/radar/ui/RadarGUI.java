@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+import pl.shatan.radar.ui.listeners.MapInputListener;
 
 /**
  * Radar`s MainFrame.
@@ -56,8 +60,15 @@ public class RadarGUI extends JFrame {
 
         // Makes app close when click the exit button.
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+        // Add menu toolbar to the window.
         this.createMenuToolbar();
+
+        ScheduledThreadPoolExecutor executor;
+        executor = new ScheduledThreadPoolExecutor(5);
+
+        // executor.scheduleAtFixedRate(new MyRepaint(frame), 0L, 20L, TimeUnit.MILLISECONDS);
+
+        // Make the frame visible.
         this.setVisible(true);
     }
 
@@ -101,25 +112,5 @@ public class RadarGUI extends JFrame {
 
     public void setRadarBackground(File map) {
         this.radarBackground = map;
-    }
-}
-
-class MapInputListener implements ActionListener {
-
-    private File map;
-    private JFileChooser mapInput;
-    private RadarGUI radarFrame;
-
-    public MapInputListener(RadarGUI myFrame) {
-        this.radarFrame = myFrame;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == mapInput) {
-            mapInput = new JFileChooser();
-            mapInput.showOpenDialog(this.radarFrame);
-            this.radarFrame.setRadarBackground(mapInput.getSelectedFile());
-        }
     }
 }
