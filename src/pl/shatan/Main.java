@@ -18,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
 
     public static void main(String[] args) {
+        /*
         Radar radar = new Radar();
 
         AirUnit airplane = new AirUnit();
@@ -32,11 +33,6 @@ public class Main {
             System.out.println(radar.getUnits().get(0).isClose(temp));
             System.out.println(radar.getUnits().get(0).distance(temp));
         });
-/*
-        ScheduledThreadPoolExecutor executor;
-        executor = new ScheduledThreadPoolExecutor(5);
-
-        executor.scheduleAtFixedRate(new MyRepaint(frame), 0L, 20L, TimeUnit.MILLISECONDS);
         */
     }
 }
