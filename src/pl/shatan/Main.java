@@ -3,6 +3,7 @@ package pl.shatan;
 import pl.shatan.radar.AirUnit;
 import pl.shatan.radar.Radar;
 
+import java.awt.*;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -34,5 +35,13 @@ public class Main {
             System.out.println(radar.getUnits().get(0).distance(temp));
         });
         */
+
+//        EventQueue.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                BasicEx ex = new BasicEx();
+//                ex.setVisible(true);
+//            }
+//        });
     }
 }

@@ -6,7 +6,6 @@ import javafx.geometry.Point3D;
  * Created by ShataN_2 on 21/04/2016.
  */
 public class Unit {
-
     private Point3D point;
     public static final int closeDistance = 100;
 
@@ -29,6 +28,7 @@ public class Unit {
     {
         this.point = new Point3D(x, y, z);
     }
+    public Point3D getPosition() { return this.point; }
 
     public boolean isClose(Unit unit)
     {
@@ -39,8 +39,6 @@ public class Unit {
     {
         return this.point.distance(unit.point);
     }
-
-
 
     @Override
     public String toString()

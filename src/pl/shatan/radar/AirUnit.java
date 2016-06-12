@@ -14,17 +14,7 @@ public class AirUnit extends Unit {
     /**
      * Air unit direction as an angle from 0 to 360 on X axis.
      */
-    private double directionX;
-
-    /**
-     * Air unit direction as an angle from 0 to 360 on Y axis.
-     */
-    private double directionY;
-
-    /**
-     * Air unit direction as an angle from 0 to 360 on Z axis.
-     */
-    private double directionZ;
+    private double direction;
 
     /**
      * Air unit speed.
@@ -33,11 +23,13 @@ public class AirUnit extends Unit {
 
     public AirUnit()
     {
-        // TODO: Implement AirUnit constructor.
+        this.direction = 0;
+        this.speed = 1;
     }
 
     public AirUnit(double x, double y, double z)
     {
+        this();
         this.setPosition(x, y, z);
     }
 
@@ -57,8 +49,23 @@ public class AirUnit extends Unit {
         this.guid = guid;
     }
 
-    public void simulateFlight()
-    {
+    public double getDirection() {
+        return direction;
+    }
 
+    public void setDirection(double dir) {
+        this.direction = dir;
+    }
+
+
+    public void move() {
+        double x, y, z;
+        x = this.getPosition().getX();
+        y = this.getPosition().getY();
+        z = this.getPosition().getZ();
+
+        x += Math.cos(Math.toRadians(this.direction)) * this.speed;
+        y += Math.sin(Math.toRadians(this.direction)) * this.speed;
+        this.setPosition(x, y, z);
     }
 }

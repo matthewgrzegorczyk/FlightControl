@@ -12,6 +12,6 @@ public class DrawLoop implements Runnable
 
 	public void run()
 	{
-		parent.repaint();
+		this.parent.repaint();
 	}
 }

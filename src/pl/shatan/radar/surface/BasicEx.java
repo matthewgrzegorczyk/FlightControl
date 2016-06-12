@@ -39,11 +39,7 @@ public class BasicEx extends JFrame {
         JButton button = new JButton("Start/Stop");
     }
 
-    private void createDrawLoop()
-    {
-        ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(4);
-        executor.sheduleAtFixedRate(new DrawLoop(this), 0, 20, TimeUnit.MILLISECONDS);
-    }
+
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
