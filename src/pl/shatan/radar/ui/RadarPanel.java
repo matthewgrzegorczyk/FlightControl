@@ -18,15 +18,18 @@ public class RadarPanel extends JPanel {
     private int frames;
     public int width;
     public int height;
+    private final String FLIGHTER_ICON = "\uF0FB";
+    private final int FONT_SIZE = 40;
 
     RadarPanel() {
         this.width = 600;
         this.height = 800;
         this.mapImage = null;
         this.radar = null;
-        this.scale = 0.0;
+        this.scale = 1.0;
         this.frames = 0;
     }
+
     RadarPanel(Radar myRadar) {
         this();
         this.radar = myRadar;
@@ -57,20 +60,20 @@ public class RadarPanel extends JPanel {
 
         AffineTransform defaultTransform = g2d.getTransform();
         for (Unit unit : radar.getUnits()) {
-            if(i++ == 0 && this.frames < 40) {
+            if((i == 0 || i == 2) && this.frames < 80 && this.frames % 2 == 0) {
                 double dir = ((AirUnit) unit).getDirection();
                 ((AirUnit) unit).setDirection(dir + 1);
             }
-//            g2d.drawLine((int) unit.getPosition().getX(), (int) unit.getPosition().getY(), (int) unit.getPosition().getX(), (int) unit.getPosition().getY());
-//            g2d.fillOval((int) unit.getPosition().getX(), (int) unit.getPosition().getY(), 5, 5);
-            g2d.setFont(new Font("FontAwesome", Font.PLAIN, 40));
+
+            g2d.setFont(new Font("FontAwesome", Font.PLAIN, this.FONT_SIZE));
             if (unit instanceof AirUnit) {
-//                g2d.rotate(Math.toRadians(((AirUnit)unit).getDirection()));
                 g2d.translate((int) unit.getPosition().getX(), (int) unit.getPosition().getY());
-                g2d.drawString("\uf0fb", (int) unit.getPosition().getX(), (int) unit.getPosition().getY());
+                g2d.rotate(Math.toRadians(((AirUnit)unit).getDirection()));
+                g2d.drawString(this.FLIGHTER_ICON, 0, 0);
                 ((AirUnit) unit).move();
                 g2d.setTransform(defaultTransform);
             }
+            i++;
         }
     }
 

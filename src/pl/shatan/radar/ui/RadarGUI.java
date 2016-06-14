@@ -117,8 +117,12 @@ public class RadarGUI extends JFrame {
         AirUnit airplane = new AirUnit();
         this.radar.addUnit(airplane);
 
-        AirUnit airplane2 = new AirUnit(100, 500, 0);
+        AirUnit airplane2 = new AirUnit(100, 300, 0);
         this.radar.addUnit(airplane2);
+
+        AirUnit airplane3 = new AirUnit(400, 300, 0);
+        airplane3.setDirection(90);
+        this.radar.addUnit(airplane3);
     }
 
     private void createMenuToolbar() {
@@ -160,8 +164,7 @@ public class RadarGUI extends JFrame {
 
     private void registerFontAwesome() {
         try {
-            GraphicsEnvironment ge =
-                    GraphicsEnvironment.getLocalGraphicsEnvironment();
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("fontawesome-webfont.ttf")));
         } catch (IOException|FontFormatException e) {
             //Handle exception

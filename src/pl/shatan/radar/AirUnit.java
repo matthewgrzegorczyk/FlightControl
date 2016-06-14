@@ -24,7 +24,7 @@ public class AirUnit extends Unit {
     public AirUnit()
     {
         this.direction = 0;
-        this.speed = 1;
+        this.speed = 1.5;
     }
 
     public AirUnit(double x, double y, double z)
