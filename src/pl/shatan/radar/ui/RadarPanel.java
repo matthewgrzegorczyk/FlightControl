@@ -3,11 +3,11 @@ package pl.shatan.radar.ui;
 import pl.shatan.radar.AirUnit;
 import pl.shatan.radar.Radar;
 import pl.shatan.radar.Unit;
+import pl.shatan.radar.ui.listeners.RadarPanelMouseListener;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
@@ -28,6 +28,9 @@ public class RadarPanel extends JPanel {
         this.radar = null;
         this.scale = 1.0;
         this.frames = 0;
+
+        // Adds mouse listener to the radar.
+        addMouseListener(new RadarPanelMouseListener());
     }
 
     RadarPanel(Radar myRadar) {
@@ -60,7 +63,7 @@ public class RadarPanel extends JPanel {
 
         AffineTransform defaultTransform = g2d.getTransform();
         for (Unit unit : radar.getUnits()) {
-            if((i == 0 || i == 2) && this.frames < 80 && this.frames % 2 == 0) {
+            if((i == 0 || i == 2) && this.frames < 180 && this.frames % 2 == 0) {
                 double dir = ((AirUnit) unit).getDirection();
                 ((AirUnit) unit).setDirection(dir + 1);
             }
