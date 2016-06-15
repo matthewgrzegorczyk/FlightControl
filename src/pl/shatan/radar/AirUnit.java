@@ -1,6 +1,9 @@
 package pl.shatan.radar;
 
 import javafx.geometry.Point3D;
+import pl.shatan.radar.commands.Command;
+
+import java.util.ArrayList;
 
 /**
  * Created by ShataN_2 on 21/04/2016.
@@ -20,6 +23,8 @@ public class AirUnit extends Unit {
      * Air unit speed.
      */
     private double speed;
+
+    private ArrayList<Command> commands;
 
     public AirUnit()
     {
@@ -57,6 +62,19 @@ public class AirUnit extends Unit {
         this.direction = dir;
     }
 
+    public double getSpeed() { return speed; }
+
+    public void setSpeed(double speed) { this.speed = speed; }
+
+    public void addCommand(Command command) {
+        commands.add(command);
+    }
+
+    public void update() {
+        for(Command command : commands) {
+            command.execute(this);
+        }
+    }
 
     public void move() {
         double x, y, z;

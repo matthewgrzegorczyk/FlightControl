@@ -2,11 +2,11 @@ package pl.shatan.radar;
 
 import javax.swing.*;
 
-public class DrawLoop implements Runnable
+public class MainLoop implements Runnable
 {
 	private JFrame parent;
 
-	public DrawLoop(JFrame parent) {
+	public MainLoop(JFrame parent) {
 		this.parent = parent;
 	}
 
