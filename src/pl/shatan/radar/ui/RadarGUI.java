@@ -13,7 +13,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import pl.shatan.radar.AirUnit;
-import pl.shatan.radar.DrawLoop;
+import pl.shatan.radar.MainLoop;
 import pl.shatan.radar.Radar;
 import pl.shatan.radar.ui.listeners.ExitAppListener;
 import pl.shatan.radar.ui.listeners.MapInputListener;
@@ -108,7 +108,7 @@ public class RadarGUI extends JFrame {
     private void createDrawLoop()
     {
         ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(4);
-        executor.scheduleAtFixedRate(new DrawLoop(this), 0, 20, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(new MainLoop(this), 0, 20, TimeUnit.MILLISECONDS);
     }
 
     private void radarSetup() {
