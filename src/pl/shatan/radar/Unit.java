@@ -10,7 +10,6 @@ import java.awt.*;
 public class Unit {
     private Radar parent;
     private Point3D point;
-    private boolean selected;
     private int radius;
     public static final int closeDistance = 100;
 
@@ -32,7 +31,6 @@ public class Unit {
     {
         this.parent = parent;
         this.setPosition(x, y, 0);
-        this.selected = false;
     }
 
     /**
@@ -91,17 +89,14 @@ public class Unit {
      * Checks if Unit is selected.
      * @return boolean
      */
-    public boolean isSelected()
-    {
-        return this.selected;
-    }
+    public boolean isSelected() { return parent.getSelectedUnit() == this; }
 
     /**
      * Set Unit as selected.
      */
     public void select()
     {
-        this.selected = true;
+        parent.select(this);
     }
 
     /**
@@ -109,7 +104,7 @@ public class Unit {
      */
     public void deselect()
     {
-        this.selected = false;
+        parent.select(null);
     }
 
     public int getRadius()
