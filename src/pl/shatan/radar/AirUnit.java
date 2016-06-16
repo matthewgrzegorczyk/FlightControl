@@ -18,11 +18,13 @@ public class AirUnit extends Unit {
      * Air unit direction as an angle from 0 to 360 on X axis.
      */
     private double direction;
+    private double deltaDirection;
 
     /**
      * Air unit speed.
      */
     private double speed;
+    private double deltaSpeed;
 
     private ArrayList<Command> commands;
 
@@ -59,12 +61,12 @@ public class AirUnit extends Unit {
     }
 
     public void setDirection(double dir) {
-        this.direction = dir;
+        deltaDirection = dir - direction;
     }
 
     public double getSpeed() { return speed; }
 
-    public void setSpeed(double speed) { this.speed = speed; }
+    public void setSpeed(double speed) { deltaSpeed = speed - this.speed; }
 
     public void addCommand(Command command) {
         commands.add(command);
@@ -73,6 +75,21 @@ public class AirUnit extends Unit {
     public void update() {
         for(Command command : commands) {
             command.execute(this);
+        }
+        commands.clear();
+        if(deltaDirection != 0) {
+            direction += deltaDirection / 10;
+            deltaDirection /= 10;
+            if(deltaDirection < 0.0001) {
+                deltaDirection = 0;
+            }
+        }
+        if(deltaSpeed != 0) {
+            speed += deltaSpeed / 10;
+            deltaSpeed /= 10;
+            if(deltaSpeed < 0.0001) {
+                deltaSpeed = 0;
+            }
         }
     }
 
