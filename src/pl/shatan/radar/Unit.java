@@ -120,4 +120,16 @@ public class Unit {
     public void update() {}
 
     public void draw(Graphics2D g) {}
+
+    public boolean intersects(double x, double y) {
+        double diffX = x - getPosition().getX();
+        double diffY = y - getPosition().getY();
+        return Math.sqrt(diffX * diffX + diffY * diffY) < getRadius();
+    }
+
+    public boolean intersects(Unit unit) {
+        double diffX = unit.getPosition().getX() - getPosition().getX();
+        double diffY = unit.getPosition().getY() - getPosition().getY();
+        return Math.sqrt(diffX * diffX + diffY * diffY) < unit.getRadius() + getRadius();
+    }
 }

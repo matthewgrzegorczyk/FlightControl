@@ -31,9 +31,13 @@ public class RadarPanelMouseListener implements MouseListener {
             RadarGUI radarGUI = (RadarGUI) SwingUtilities.getWindowAncestor(this.radarPanel);
 
             for (Unit unit : radarGUI.getRadarInstance().getUnits()) {
-                if(((Math.pow((e.getX() - unit.getPosition().getX()), 2) + (Math.pow((e.getX() - unit.getPosition().getX()), 2)))) < Math.pow(unit.getRadius(), 2)) {
+                if(unit.intersects(e.getX(), e.getY())) {
                     unit.select();
                     System.out.println(unit.getRadius());
+                    return;
+                }
+                else {
+                    radarGUI.getRadarInstance().select(null);
                 }
             }
         }

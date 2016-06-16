@@ -117,11 +117,11 @@ public class AirUnit extends Unit {
         else {
             g.setColor(Color.white);
         }
-
         g.drawString(this.FLIGHTER_ICON, -fontMetrics.charWidth(this.FLIGHTER_CHAR) / 2, realHeight / 2);
         // temporary red dot, is a center point of airplane
         g.setColor(Color.red);
         g.drawOval(-1, -1, 2, 2);
+        g.drawOval(-getRadius() / 2, -getRadius() / 2, getRadius(), getRadius());
 //        g.drawOval(-this.getRadius()/2, -this.getRadius()/2, this.getRadius(), this.getRadius());
         g.setTransform(defaultTransform);
     }
