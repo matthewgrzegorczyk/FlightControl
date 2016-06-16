@@ -2,6 +2,8 @@ package pl.shatan.radar;
 
 import javafx.geometry.Point3D;
 
+import java.awt.*;
+
 /**
  * Created by ShataN_2 on 21/04/2016.
  */
@@ -108,4 +110,6 @@ public class Unit {
     {
         this.selected = false;
     }
+
+    public void draw(Graphics2D g) {}
 }
