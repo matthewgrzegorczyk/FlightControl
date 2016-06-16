@@ -68,20 +68,13 @@ public class RadarPanel extends JPanel {
         g2d.scale(this.scale, this.scale);
 
         this.drawBackground(g2d);
-        int i = 0;
         this.frames++;
 
         for (Unit unit : radar.getUnits()) {
-            if((i == 0 || i == 2) && this.frames < 180 && this.frames % 2 == 0) {
-                double dir = ((AirUnit) unit).getDirection();
-                ((AirUnit) unit).setDirection(dir + 1);
-            }
-
+            unit.update();
+        }
+        for (Unit unit : radar.getUnits()) {
             unit.draw(g2d);
-            if (unit instanceof AirUnit) {
-                ((AirUnit) unit).move();
-            }
-            i++;
         }
         g2d.dispose();
     }

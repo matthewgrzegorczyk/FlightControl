@@ -122,5 +122,7 @@ public class Unit {
         this.radius = newRadius;
     }
 
+    public void update() {}
+
     public void draw(Graphics2D g) {}
 }

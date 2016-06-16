@@ -129,7 +129,7 @@ public class RadarGUI extends JFrame {
         this.radar.addUnit(airplane2);
 
         AirUnit airplane3 = new AirUnit(400, 300, 0);
-        airplane3.setDirection(90);
+        airplane3.setDirection(180);
         this.radar.addUnit(airplane3);
     }
 
