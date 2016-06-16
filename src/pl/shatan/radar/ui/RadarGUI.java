@@ -9,12 +9,14 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import pl.shatan.radar.AirUnit;
 import pl.shatan.radar.MainLoop;
 import pl.shatan.radar.Radar;
+import pl.shatan.radar.Unit;
 import pl.shatan.radar.ui.listeners.ExitAppListener;
 import pl.shatan.radar.ui.listeners.MapInputListener;
 import pl.shatan.radar.ui.listeners.MenuHelpAppListener;
@@ -45,6 +47,8 @@ public class RadarGUI extends JFrame {
      * RadarPanel instance.
      */
     private RadarPanel radarPanel;
+
+    private RadarTabbedPane radarTabbedPane;
 
     /**
      * Radar window width and height.
@@ -97,6 +101,10 @@ public class RadarGUI extends JFrame {
         radarSetup();
         this.radarPanel = new RadarPanel(this.radar);
         this.add(radarPanel, BorderLayout.CENTER);
+
+        this.radarTabbedPane = new RadarTabbedPane(this);
+        this.add(radarTabbedPane, BorderLayout.EAST);
+        radarTabbedPane.setMinimumSize(new Dimension(400, 200));
 
         // Draw loop.
         this.createDrawLoop();
@@ -186,5 +194,15 @@ public class RadarGUI extends JFrame {
 
     public RadarPanel getRadarPanel() {
         return this.radarPanel;
+    }
+
+    public Radar getRadarInstance()
+    {
+        return this.radar;
+    }
+
+    public ArrayList<Unit> getRadarUnits()
+    {
+        return this.getRadarInstance().getUnits();
     }
 }
