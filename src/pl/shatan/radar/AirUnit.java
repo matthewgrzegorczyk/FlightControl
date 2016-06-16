@@ -40,20 +40,20 @@ public class AirUnit extends Unit {
 
     private ArrayList<Command> commands = new ArrayList<>();
 
-    public AirUnit()
+    public AirUnit(Radar radar)
     {
+        this(radar, 0, 0);
+    }
+
+    public AirUnit(Radar radar, double x, double y)
+    {
+        super(radar, x, y);
         this.direction = 0;
         this.targetDirection = 0;
         this.baseDirection = 0;
         this.speed = 1.5;
         this.setRadius(50);
         this.deltaSpeed = 0;
-    }
-
-    public AirUnit(double x, double y, double z)
-    {
-        this();
-        this.setPosition(x, y, z);
     }
 
     /**
@@ -139,11 +139,12 @@ public class AirUnit extends Unit {
 
     public static AirUnit createRandomAtPosition(double x, double y, double z)
     {
-        AirUnit unit = new AirUnit(x, y, z);
-        unit.setSpeed(Math.random() * AirUnit.maxSpeed);
-        unit.setDirection(Math.random() * AirUnit.maxDirection);
-
-        return unit;
+//        AirUnit unit = new AirUnit(x, y, z);
+//        unit.setSpeed(Math.random() * AirUnit.maxSpeed);
+//        unit.setDirection(Math.random() * AirUnit.maxDirection);
+//
+//        return unit;
+        return null;
     }
 
     public void interpolateDirection()

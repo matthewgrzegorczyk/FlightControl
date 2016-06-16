@@ -16,6 +16,8 @@ public class Radar {
      */
     private ArrayList<Unit> units;
 
+    private Unit selectedUnit;
+
     /**
      * Default constructor with 100 units and default Radar name.
      */
@@ -23,6 +25,7 @@ public class Radar {
     {
         this.name = "World Radar";
         this.units = new ArrayList<Unit>(100);
+        this.selectedUnit = null;
     }
 
     /**
@@ -35,14 +38,23 @@ public class Radar {
         this.units = new ArrayList<Unit>();
     }
 
-    /**
-     * Adds unit to the radar.
-     * @param unit
-     */
-    public void addUnit(Unit unit)
-    {
-        this.units.add(unit);
+    public void select(Unit unit) {
+        this.selectedUnit = unit;
     }
+
+    public AirPlane spawnAirplane(double x, double y) {
+        AirPlane unit = new AirPlane(this, x, y);
+        this.units.add(unit);
+        return unit;
+    }
+
+    public GroundUnit spawnGroundUnit(double x, double y) {
+        GroundUnit unit = new GroundUnit(this, x, y);
+        this.units.add(unit);
+        return unit;
+    }
+
+    public Unit getSelectedUnit() { return selectedUnit; }
 
     /**
      * Gets units which are on the radar.

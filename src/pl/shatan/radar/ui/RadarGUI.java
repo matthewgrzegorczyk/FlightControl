@@ -122,15 +122,12 @@ public class RadarGUI extends JFrame {
     private void radarSetup() {
         this.radar = new Radar("World Radar");
 
-        AirUnit airplane = new AirUnit();
-        this.radar.addUnit(airplane);
+        AirUnit airplane = radar.spawnAirplane(0, 0);
 
-        AirUnit airplane2 = new AirUnit(100, 300, 0);
-        this.radar.addUnit(airplane2);
+        AirUnit airplane2 = radar.spawnAirplane(100, 300);
 
-        AirUnit airplane3 = new AirUnit(400, 300, 0);
+        AirUnit airplane3 = radar.spawnAirplane(400, 300);
         airplane3.setDirection(180);
-        this.radar.addUnit(airplane3);
     }
 
     private void createMenuToolbar() {

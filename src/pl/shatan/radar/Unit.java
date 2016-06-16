@@ -8,6 +8,7 @@ import java.awt.*;
  * Created by ShataN_2 on 21/04/2016.
  */
 public class Unit {
+    private Radar parent;
     private Point3D point;
     private boolean selected;
     private int radius;
@@ -16,10 +17,9 @@ public class Unit {
     /**
      * Unit default constructor which sets unit at position (0, 0, 0)
      */
-    public Unit()
+    public Unit(Radar parent)
     {
-        this.setPosition(0, 0, 0);
-        this.selected = false;
+        this(parent, 0, 0);
     }
 
     /**
@@ -28,10 +28,10 @@ public class Unit {
      * @param y
      * @param z
      */
-    public Unit(double x, double y, double z)
+    public Unit(Radar parent, double x, double y)
     {
-
-        this.setPosition(x, y, z);
+        this.parent = parent;
+        this.setPosition(x, y, 0);
         this.selected = false;
     }
 
