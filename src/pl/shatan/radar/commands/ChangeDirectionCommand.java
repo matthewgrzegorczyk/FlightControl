@@ -3,7 +3,7 @@ package pl.shatan.radar.commands;
 import pl.shatan.radar.AirUnit;
 
 /**
- * Created by SwitchiX on 2016-06-16.
+ * Command for changing unit direction.
  */
 public class ChangeDirectionCommand implements Command
 {

@@ -175,7 +175,8 @@ public class RadarGUI extends JFrame {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("fontawesome-webfont.ttf")));
         } catch (IOException|FontFormatException e) {
-            //Handle exception
+            System.out.println("Error durring registering font.");
+            System.exit(0);
         }
     }
     public File getRadarBackground() {

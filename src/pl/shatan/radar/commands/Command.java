@@ -3,7 +3,7 @@ package pl.shatan.radar.commands;
 import pl.shatan.radar.AirUnit;
 
 /**
- * Created by SwitchiX on 2016-06-16.
+ * Unit commands interface.
  */
 public interface Command {
     public void execute(AirUnit unit);
