@@ -44,7 +44,7 @@ public class AddAirUnitListener implements ActionListener {
                     z = 0;
 
             AirUnit unit = AirUnit.createRandomAtPosition(x, y, z);
-
+            unit.setDirection(Math.random());
             radar.addUnit(unit);
         }
 

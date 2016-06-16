@@ -111,5 +111,7 @@ public class Unit {
         this.selected = false;
     }
 
+    public void update() {}
+
     public void draw(Graphics2D g) {}
 }

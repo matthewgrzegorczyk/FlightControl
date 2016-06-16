@@ -29,7 +29,8 @@ public class AirUnit extends Unit {
      * Air unit direction as an angle from 0 to 360 on X axis.
      */
     private double direction;
-    private double deltaDirection;
+    private double targetDirection;
+    private double baseDirection;
 
     /**
      * Air unit speed.
@@ -37,12 +38,15 @@ public class AirUnit extends Unit {
     private double speed;
     private double deltaSpeed;
 
-    private ArrayList<Command> commands;
+    private ArrayList<Command> commands = new ArrayList<>();
 
     public AirUnit()
     {
         this.direction = 0;
+        this.targetDirection = 0;
+        this.baseDirection = 0;
         this.speed = 1.5;
+        this.deltaSpeed = 0;
     }
 
     public AirUnit(double x, double y, double z)
@@ -72,7 +76,8 @@ public class AirUnit extends Unit {
     }
 
     public void setDirection(double dir) {
-        deltaDirection = dir - direction;
+        this.targetDirection = dir;
+        this.baseDirection = direction;
     }
 
     public double getSpeed() { return speed; }
@@ -83,25 +88,14 @@ public class AirUnit extends Unit {
         commands.add(command);
     }
 
+    @Override
     public void update() {
         for(Command command : commands) {
             command.execute(this);
         }
         commands.clear();
-        if(deltaDirection != 0) {
-            direction += deltaDirection / 10;
-            deltaDirection /= 10;
-            if(deltaDirection < 0.0001) {
-                deltaDirection = 0;
-            }
-        }
-        if(deltaSpeed != 0) {
-            speed += deltaSpeed / 10;
-            deltaSpeed /= 10;
-            if(deltaSpeed < 0.0001) {
-                deltaSpeed = 0;
-            }
-        }
+        interpolateDirection();
+        move();
     }
 
     @Override
@@ -140,5 +134,16 @@ public class AirUnit extends Unit {
         unit.setDirection(Math.random() * AirUnit.maxDirection);
 
         return unit;
+    }
+
+    public void interpolateDirection()
+    {
+        final double deltaTime = 1000.0 / 20.0;
+        direction += (targetDirection - baseDirection) / deltaTime;
+        System.out.println("Direction: " + direction + " target: " + targetDirection + " base: " + baseDirection);
+        if(targetDirection - direction < 0.01) {
+            direction = targetDirection;
+            baseDirection = direction;
+        }
     }
 }
