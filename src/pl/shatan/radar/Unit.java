@@ -10,6 +10,7 @@ import java.awt.*;
 public class Unit {
     private Point3D point;
     private boolean selected;
+    private int radius;
     public static final int closeDistance = 100;
 
     /**
@@ -109,6 +110,16 @@ public class Unit {
     public void deselect()
     {
         this.selected = false;
+    }
+
+    public int getRadius()
+    {
+        return this.radius;
+    }
+
+    public void setRadius(int newRadius)
+    {
+        this.radius = newRadius;
     }
 
     public void draw(Graphics2D g) {}

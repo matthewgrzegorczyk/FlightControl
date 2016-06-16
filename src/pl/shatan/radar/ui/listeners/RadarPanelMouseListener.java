@@ -1,10 +1,12 @@
 package pl.shatan.radar.ui.listeners;
 
 
+import pl.shatan.radar.Unit;
 import pl.shatan.radar.ui.RadarGUI;
 import pl.shatan.radar.ui.RadarPanel;
 import pl.shatan.radar.ui.RadarPanelContextMenu;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -24,7 +26,17 @@ public class RadarPanelMouseListener implements MouseListener {
      */
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println(e);
+        if (e.getSource() == this.radarPanel)
+        {
+            RadarGUI radarGUI = (RadarGUI) SwingUtilities.getWindowAncestor(this.radarPanel);
+
+            for (Unit unit : radarGUI.getRadarInstance().getUnits()) {
+                if(((Math.pow((e.getX() - unit.getPosition().getX()), 2) + (Math.pow((e.getX() - unit.getPosition().getX()), 2)))) < Math.pow(unit.getRadius(), 2)) {
+                    unit.select();
+                    System.out.println(unit.getRadius());
+                }
+            }
+        }
     }
 
     /**
@@ -34,7 +46,7 @@ public class RadarPanelMouseListener implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println(e);
+//        System.out.println(e);
         if (e.isPopupTrigger()) {
             RadarPanelContextMenu menu = new RadarPanelContextMenu(this.radarPanel, e.getX(), e.getY(), 0.0);
             menu.show(e.getComponent(), e.getX(), e.getY());
@@ -48,7 +60,7 @@ public class RadarPanelMouseListener implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        System.out.println(e);
+//        System.out.println(e);
         if (e.isPopupTrigger()) {
             RadarPanelContextMenu menu = new RadarPanelContextMenu(this.radarPanel, e.getX(), e.getY(), 0.0);
             menu.show(e.getComponent(), e.getX(), e.getY());

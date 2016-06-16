@@ -43,6 +43,7 @@ public class AirUnit extends Unit {
     {
         this.direction = 0;
         this.speed = 1.5;
+        this.setRadius(50);
     }
 
     public AirUnit(double x, double y, double z)
@@ -114,11 +115,20 @@ public class AirUnit extends Unit {
 
         g.translate((int) getPosition().getX(), (int) getPosition().getY());
         g.rotate(Math.toRadians(getDirection()));
-        g.setColor(Color.white);
+
+        // Sets the color to pink if unit is selected.
+        if(this.isSelected()) {
+            g.setColor(Color.pink);
+        }
+        else {
+            g.setColor(Color.white);
+        }
+
         g.drawString(this.FLIGHTER_ICON, -fontMetrics.charWidth(this.FLIGHTER_CHAR) / 2, realHeight / 2);
         // temporary red dot, is a center point of airplane
         g.setColor(Color.red);
         g.drawOval(-1, -1, 2, 2);
+//        g.drawOval(-this.getRadius()/2, -this.getRadius()/2, this.getRadius(), this.getRadius());
         g.setTransform(defaultTransform);
     }
 
@@ -140,5 +150,9 @@ public class AirUnit extends Unit {
         unit.setDirection(Math.random() * AirUnit.maxDirection);
 
         return unit;
+    }
+
+    public boolean detectCollision(Unit unit) {
+        return (this.getRadius() + unit.getRadius()) <= this.distance(unit);
     }
 }
