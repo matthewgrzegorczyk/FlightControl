@@ -8,4 +8,9 @@ public class GroundUnit extends Unit {
     {
         // TODO: Implement GroundUnit constructor.
     }
+
+    public GroundUnit(double x, double y)
+    {
+        this.setPosition(x, y, 0);
+    }
 }

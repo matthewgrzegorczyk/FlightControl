@@ -11,12 +11,24 @@ import java.awt.event.ActionListener;
 public class AddAirUnitListener implements ActionListener {
     private RadarGUI radarFrame;
     private JButton addAirUnitButton;
+    private JMenuItem addAirUnitMenuItem;
+    private double x, y, z;
 
     public AddAirUnitListener(RadarGUI frame, JButton button)
     {
         this.radarFrame = frame;
         this.addAirUnitButton = button;
     }
+
+    public AddAirUnitListener(RadarGUI frame, JMenuItem item, double x, double y, double z)
+    {
+        this.radarFrame = frame;
+        this.addAirUnitMenuItem = item;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
     /**
      * Invoked when an action occurs.
      *
@@ -24,13 +36,22 @@ public class AddAirUnitListener implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == this.addAirUnitButton) {
+        if (e.getSource() == this.addAirUnitButton) {
             Radar radar = radarFrame.getRadarInstance();
+
             double x = Math.random() * radarFrame.getWidth(),
                     y = Math.random() * radarFrame.getHeight(),
                     z = 0;
-            AirUnit unit = new AirUnit(x, y, z);
-            unit.setDirection((int) (Math.random() * 360));
+
+            AirUnit unit = AirUnit.createRandomAtPosition(x, y, z);
+
+            radar.addUnit(unit);
+        }
+
+        if (e.getSource() == this.addAirUnitMenuItem) {
+            Radar radar = radarFrame.getRadarInstance();
+            AirUnit unit = AirUnit.createRandomAtPosition(this.x, this.y, this.z);
+            System.out.println(unit);
             radar.addUnit(unit);
         }
     }

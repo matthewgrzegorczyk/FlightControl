@@ -9,6 +9,8 @@ import java.util.ArrayList;
  * Created by ShataN_2 on 21/04/2016.
  */
 public class AirUnit extends Unit {
+    public static double maxSpeed = 4;
+    public static double maxDirection = 360;
     /**
      * Unit unique id.
      */
@@ -102,5 +104,14 @@ public class AirUnit extends Unit {
         x += Math.cos(Math.toRadians(this.direction)) * this.speed;
         y += Math.sin(Math.toRadians(this.direction)) * this.speed;
         this.setPosition(x, y, z);
+    }
+
+    public static AirUnit createRandomAtPosition(double x, double y, double z)
+    {
+        AirUnit unit = new AirUnit(x, y, z);
+        unit.setSpeed(Math.random() * AirUnit.maxSpeed);
+        unit.setDirection(Math.random() * AirUnit.maxDirection);
+
+        return unit;
     }
 }

@@ -11,6 +11,17 @@ public class RadarTabbedPane extends JTabbedPane {
     private JPanel airUnitsPanel;
     private JPanel unitInfoPanel;
 
+    private JTextField airUnitX;
+    private JTextField airUnitY;
+    private JTextField airUnitZ;
+    private JTextField airUnitSpeed;
+    private JTextField airUnitDirection;
+    private JButton addAirUnitButton;
+
+    private JTextField groundUnitX;
+    private JTextField groundUnitY;
+    private JTextField groundUnitZ;
+
     public RadarTabbedPane(RadarGUI frame)
     {
         this.radarFrame = frame;
@@ -37,21 +48,32 @@ public class RadarTabbedPane extends JTabbedPane {
 
         this.initAirUnitsPanel();
 
-        this.add("Air Units", this.groundUnitsPanel);
-        this.add("Ground Units", this.airUnitsPanel);
+        this.add("Air Units", this.airUnitsPanel);
+        this.add("Ground Units", this.groundUnitsPanel);
         this.add("Unit Info", this.unitInfoPanel);
     }
 
     private void initAirUnitsPanel()
     {
-        this.groundUnitsPanel.setLayout(new GridLayout(4, 2));
-        JButton addAirUnitButton = new JButton("Add Unit");
-        addAirUnitButton.addActionListener(new AddAirUnitListener(this.radarFrame, addAirUnitButton));
-        this.groundUnitsPanel.add(addAirUnitButton);
+        this.airUnitsPanel.setLayout(new GridLayout(4, 15, 100, 50));
+        this.airUnitX = new JTextField("X", 1);
+        this.airUnitY = new JTextField("Y", 1);
+        this.airUnitZ = new JTextField("Z", 1);
+
+        this.airUnitsPanel.add(this.airUnitX);
+        this.airUnitsPanel.add(this.airUnitY);
+        this.airUnitsPanel.add(this.airUnitZ);
+
+        // Add Air Unit setup and register listener.
+        this.addAirUnitButton = new JButton("Add Unit");
+        this.addAirUnitButton.addActionListener(new AddAirUnitListener(this.radarFrame, this.addAirUnitButton));
+
+        this.airUnitsPanel.add(addAirUnitButton);
     }
     private void initGroundUnitsPanel()
     {
-        // TODO: Implement all the forms.
+
+
     }
 
 }

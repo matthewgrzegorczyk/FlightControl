@@ -1,10 +1,21 @@
 package pl.shatan.radar.ui.listeners;
 
 
+import pl.shatan.radar.ui.RadarGUI;
+import pl.shatan.radar.ui.RadarPanel;
+import pl.shatan.radar.ui.RadarPanelContextMenu;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class RadarPanelMouseListener implements MouseListener {
+    private RadarPanel radarPanel;
+
+    public RadarPanelMouseListener(RadarPanel panel)
+    {
+        this.radarPanel = panel;
+    }
+
     /**
      * Invoked when the mouse button has been clicked (pressed
      * and released) on a component.
@@ -24,6 +35,10 @@ public class RadarPanelMouseListener implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         System.out.println(e);
+        if (e.isPopupTrigger()) {
+            RadarPanelContextMenu menu = new RadarPanelContextMenu(this.radarPanel, e.getX(), e.getY(), 0.0);
+            menu.show(e.getComponent(), e.getX(), e.getY());
+        }
     }
 
     /**
@@ -34,6 +49,10 @@ public class RadarPanelMouseListener implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         System.out.println(e);
+        if (e.isPopupTrigger()) {
+            RadarPanelContextMenu menu = new RadarPanelContextMenu(this.radarPanel, e.getX(), e.getY(), 0.0);
+            menu.show(e.getComponent(), e.getX(), e.getY());
+        }
     }
 
     /**
@@ -43,7 +62,7 @@ public class RadarPanelMouseListener implements MouseListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-        System.out.println(e);
+//        System.out.println(e);
     }
 
     /**
@@ -53,6 +72,6 @@ public class RadarPanelMouseListener implements MouseListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-        System.out.println(e);
+//        System.out.println(e);
     }
 }

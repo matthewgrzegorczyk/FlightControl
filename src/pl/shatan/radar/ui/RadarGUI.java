@@ -120,7 +120,7 @@ public class RadarGUI extends JFrame {
     }
 
     private void radarSetup() {
-        this.radar = new Radar();
+        this.radar = new Radar("World Radar");
 
         AirUnit airplane = new AirUnit();
         this.radar.addUnit(airplane);

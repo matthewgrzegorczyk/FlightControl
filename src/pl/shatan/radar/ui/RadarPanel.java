@@ -4,6 +4,8 @@ import pl.shatan.radar.AirUnit;
 import pl.shatan.radar.Radar;
 import pl.shatan.radar.Unit;
 import pl.shatan.radar.ui.listeners.RadarPanelMouseListener;
+import pl.shatan.radar.ui.listeners.RadarPanelMouseMotionListener;
+import pl.shatan.radar.ui.listeners.RadarPanelMouseWheelListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,12 +14,16 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 
 public class RadarPanel extends JPanel {
+    public static final double mouseWheelStep = 0.1;
+
     private Radar radar;
     private BufferedImage mapImage;
     private double scale;
     private int frames;
+
     public int width;
     public int height;
+
     private final String FLIGHTER_ICON = "\uF0FB";
     private final int FONT_SIZE = 40;
 
@@ -30,7 +36,9 @@ public class RadarPanel extends JPanel {
         this.frames = 0;
 
         // Adds mouse listener to the radar.
-        addMouseListener(new RadarPanelMouseListener());
+        addMouseListener(new RadarPanelMouseListener(this));
+        addMouseMotionListener(new RadarPanelMouseMotionListener(this));
+        addMouseWheelListener(new RadarPanelMouseWheelListener(this));
     }
 
     RadarPanel(Radar myRadar) {
@@ -92,5 +100,13 @@ public class RadarPanel extends JPanel {
 
     public void setBackgroundImage(BufferedImage image) {
         this.mapImage = image;
+    }
+
+    public double getScale() {
+        return this.scale;
+    }
+
+    public void setScale(double newScale) {
+        this.scale = newScale;
     }
 }
