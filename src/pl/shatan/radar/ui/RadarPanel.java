@@ -44,6 +44,7 @@ public class RadarPanel extends JPanel {
         this.mapImage = myRadarMap;
     }
 
+    @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         // Draw a black background that is as big as the game board
@@ -53,6 +54,7 @@ public class RadarPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         // Set the drawing color to white
         g2d.setPaint(Color.WHITE);
+        g2d.setFont(new Font("FontAwesome", Font.PLAIN, this.FONT_SIZE));
 
         // Set scaling level.
         g2d.scale(this.scale, this.scale);
@@ -61,23 +63,19 @@ public class RadarPanel extends JPanel {
         int i = 0;
         this.frames++;
 
-        AffineTransform defaultTransform = g2d.getTransform();
         for (Unit unit : radar.getUnits()) {
             if((i == 0 || i == 2) && this.frames < 180 && this.frames % 2 == 0) {
                 double dir = ((AirUnit) unit).getDirection();
                 ((AirUnit) unit).setDirection(dir + 1);
             }
 
-            g2d.setFont(new Font("FontAwesome", Font.PLAIN, this.FONT_SIZE));
+            unit.draw(g2d);
             if (unit instanceof AirUnit) {
-                g2d.translate((int) unit.getPosition().getX(), (int) unit.getPosition().getY());
-                g2d.rotate(Math.toRadians(((AirUnit)unit).getDirection()));
-                g2d.drawString(this.FLIGHTER_ICON, 0, 0);
                 ((AirUnit) unit).move();
-                g2d.setTransform(defaultTransform);
             }
             i++;
         }
+        g2d.dispose();
     }
 
     private void drawBackground(Graphics2D g2d) {

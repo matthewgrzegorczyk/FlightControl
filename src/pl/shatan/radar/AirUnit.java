@@ -3,12 +3,20 @@ package pl.shatan.radar;
 import javafx.geometry.Point3D;
 import pl.shatan.radar.commands.Command;
 
+import java.awt.*;
+import java.awt.font.FontRenderContext;
+import java.awt.font.LineMetrics;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
  * Created by ShataN_2 on 21/04/2016.
  */
 public class AirUnit extends Unit {
+    private final String FLIGHTER_ICON = "\uF0FB";
+    private final char FLIGHTER_CHAR = '\uF0FB';
+
     /**
      * Unit unique id.
      */
@@ -91,6 +99,24 @@ public class AirUnit extends Unit {
                 deltaSpeed = 0;
             }
         }
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+        AffineTransform defaultTransform = g.getTransform();
+        FontMetrics fontMetrics = g.getFontMetrics();
+        FontRenderContext fontRenderContext = g.getFontRenderContext();
+        LineMetrics lineMetrics = g.getFont().getLineMetrics(this.FLIGHTER_ICON, fontRenderContext);
+        float realHeight = fontMetrics.getMaxAscent() - 8;
+
+        g.translate((int) getPosition().getX(), (int) getPosition().getY());
+        g.rotate(Math.toRadians(getDirection()));
+        g.setColor(Color.white);
+        g.drawString(this.FLIGHTER_ICON, -fontMetrics.charWidth(this.FLIGHTER_CHAR) / 2, realHeight / 2);
+        // temporary red dot, is a center point of airplane
+        g.setColor(Color.red);
+        g.drawOval(-1, -1, 2, 2);
+        g.setTransform(defaultTransform);
     }
 
     public void move() {
