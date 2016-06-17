@@ -51,7 +51,7 @@ public class AirUnit extends Unit {
         this.direction = 0;
         this.targetDirection = 0;
         this.baseDirection = 0;
-        this.speed = 1.5;
+        this.speed = 1;
         this.setRadius(50);
         this.deltaSpeed = 0;
     }
@@ -81,9 +81,11 @@ public class AirUnit extends Unit {
         this.baseDirection = direction;
     }
 
-    public double getSpeed() { return speed; }
+    public double getSpeed() {
+        return speed;
+    }
 
-    public void setSpeed(double speed) { deltaSpeed = speed - this.speed; }
+    public void setSpeed(double speed) { this.deltaSpeed = speed - this.speed; }
 
     public void addCommand(Command command) {
         commands.add(command);
@@ -152,7 +154,7 @@ public class AirUnit extends Unit {
         direction += (targetDirection - baseDirection) / deltaTime;
 //        System.out.println("Direction: " + direction + " target: " + targetDirection + " base: " + baseDirection);
 
-        if(targetDirection - direction < 0.01) {
+        if(Math.abs(targetDirection - direction) < 0.01) {
             direction = targetDirection;
             baseDirection = direction;
         }

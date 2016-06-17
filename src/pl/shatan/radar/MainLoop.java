@@ -1,5 +1,7 @@
 package pl.shatan.radar;
 
+import pl.shatan.radar.ui.RadarGUI;
+
 import javax.swing.*;
 
 public class MainLoop implements Runnable
@@ -13,5 +15,7 @@ public class MainLoop implements Runnable
 	public void run()
 	{
 		this.parent.repaint();
+		RadarGUI radarGUI = (RadarGUI) parent;
+		radarGUI.getRadarTabbedPane().updateSelectedUnitInfo();
 	}
 }

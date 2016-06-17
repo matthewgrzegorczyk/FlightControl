@@ -42,6 +42,14 @@ public class Unit {
         return this.point.toString();
     }
 
+    public String position(boolean textarea) {
+        String output = "";
+        if (textarea == true) {
+            output += "Position at X: " + this.point.getX() + " Y: " + this.point.getY() + " Z: " + this.point.getZ();
+        }
+        return output;
+    }
+
     /**
      * Sets unit position.
      * @param x

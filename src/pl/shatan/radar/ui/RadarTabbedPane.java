@@ -1,6 +1,10 @@
 package pl.shatan.radar.ui;
 
+import pl.shatan.radar.Unit;
+import pl.shatan.radar.commands.ChangeDirectionCommand;
 import pl.shatan.radar.ui.listeners.AddAirUnitListener;
+import pl.shatan.radar.ui.listeners.UnitChangeDirectionListener;
+import pl.shatan.radar.ui.listeners.UnitChangeSpeedListener;
 
 import javax.swing.*;
 import javax.xml.soap.Text;
@@ -24,6 +28,10 @@ public class RadarTabbedPane extends JTabbedPane {
     private JTextField groundUnitZ;
 
     private JTextArea unitInfo;
+    private JButton unitChangeDirectionButton;
+    private JButton unitChangeSpeedButton;
+    private JTextField unitDirectionAngle;
+    private JTextField unitSpeed;
 
     public RadarTabbedPane(RadarGUI frame)
     {
@@ -59,7 +67,7 @@ public class RadarTabbedPane extends JTabbedPane {
 
     private void initAirUnitsPanel()
     {
-//        this.airUnitsPanel.setLayout(new GridLayout(10, 15, 0, 30));
+        this.airUnitsPanel.setLayout(new GridLayout(10, 15, 0, 30));
         this.airUnitX = new JTextField("X", 1);
         this.airUnitY = new JTextField("Y", 1);
         this.airUnitZ = new JTextField("Z", 1);
@@ -76,15 +84,42 @@ public class RadarTabbedPane extends JTabbedPane {
     }
     private void initGroundUnitsPanel()
     {
-
-
     }
 
     private void initUnitInfoPanel()
     {
+        this.unitInfoPanel.setLayout(new GridLayout(10, 20, 0, 30));
         this.unitInfo = new JTextArea(8, 25);
-        this.unitInfo.setText(radarFrame.getName());
+        this.unitInfo.setLineWrap(true);
+        this.unitInfo.setText("No Unit selected.");
+
+        this.unitDirectionAngle = new JTextField("0");
+        this.unitSpeed = new JTextField("0");
+
+        // Button initializations.
+        this.unitChangeDirectionButton = new JButton("Change direction");
+        this.unitChangeDirectionButton.addActionListener(new UnitChangeDirectionListener(this.unitChangeDirectionButton, this.radarFrame, this.unitDirectionAngle));
+        this.unitChangeSpeedButton = new JButton("Change speed");
+        this.unitChangeSpeedButton.addActionListener(new UnitChangeSpeedListener(this.unitChangeSpeedButton, this.radarFrame, this.unitSpeed));
+
+        // Adding forms to the panel.
         this.unitInfoPanel.add(this.unitInfo);
+        this.unitInfoPanel.add(this.unitDirectionAngle);
+        this.unitInfoPanel.add(unitChangeDirectionButton);
+        this.unitInfoPanel.add(this.unitSpeed);
+        this.unitInfoPanel.add(this.unitChangeSpeedButton);
+    }
+
+    public void updateSelectedUnitInfo()
+    {
+        Unit selectedUnit = this.radarFrame.getRadarInstance().getSelectedUnit();
+        if (selectedUnit != null) {
+            String output = selectedUnit.position(true);
+            this.unitInfo.setText(output);
+        }
+        else {
+            this.unitInfo.setText("No unit selected.");
+        }
     }
 
 }

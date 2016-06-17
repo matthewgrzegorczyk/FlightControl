@@ -37,7 +37,6 @@ public class RadarPanelMouseListener implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        System.out.println(e);
         if (e.isPopupTrigger()) {
             RadarPanelContextMenu menu = new RadarPanelContextMenu(this.radarPanel, e.getX(), e.getY(), 0.0);
             menu.show(e.getComponent(), e.getX(), e.getY());
@@ -52,11 +51,11 @@ public class RadarPanelMouseListener implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-//        System.out.println(e);
         if (e.isPopupTrigger()) {
             RadarPanelContextMenu menu = new RadarPanelContextMenu(this.radarPanel, e.getX() / this.radarPanel.getScale(), e.getY()/this.radarPanel.getScale(), 0.0);
             menu.show(e.getComponent(), e.getX(), e.getY());
         }
+        this.selectUnitOnMouseEvent(e);
     }
 
     /**
@@ -80,11 +79,12 @@ public class RadarPanelMouseListener implements MouseListener {
     }
 
     public void selectUnitOnMouseEvent(MouseEvent e) {
-        if (e.getSource() == this.radarPanel) {
+        if (e.getSource() == this.radarPanel && e.getButton() == 1) {
             RadarGUI radarGUI = (RadarGUI) SwingUtilities.getWindowAncestor(this.radarPanel);
             for (Unit unit : radarGUI.getRadarInstance().getUnits()) {
-                if(unit.intersects(e.getX(), e.getY())) {
+                if(unit.intersects(e.getX() / radarPanel.getScale(), e.getY() / radarPanel.getScale())) {
                     unit.select();
+                    return;
                 }
                 else {
                     radarGUI.getRadarInstance().select(null);
