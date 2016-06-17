@@ -6,4 +6,7 @@ package pl.shatan.radar;
 public class AirPort extends GroundUnit {
     private int capacity;
 
+    public AirPort(Radar parent) {
+        super(parent);
+    }
 }

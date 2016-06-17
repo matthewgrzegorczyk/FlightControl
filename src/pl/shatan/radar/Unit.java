@@ -8,18 +8,17 @@ import java.awt.*;
  * Created by ShataN_2 on 21/04/2016.
  */
 public class Unit {
+    private Radar parent;
     private Point3D point;
-    private boolean selected;
     private int radius;
     public static final int closeDistance = 100;
 
     /**
      * Unit default constructor which sets unit at position (0, 0, 0)
      */
-    public Unit()
+    public Unit(Radar parent)
     {
-        this.setPosition(0, 0, 0);
-        this.selected = false;
+        this(parent, 0, 0);
     }
 
     /**
@@ -28,11 +27,10 @@ public class Unit {
      * @param y
      * @param z
      */
-    public Unit(double x, double y, double z)
+    public Unit(Radar parent, double x, double y)
     {
-
-        this.setPosition(x, y, z);
-        this.selected = false;
+        this.parent = parent;
+        this.setPosition(x, y, 0);
     }
 
     /**
@@ -91,17 +89,14 @@ public class Unit {
      * Checks if Unit is selected.
      * @return boolean
      */
-    public boolean isSelected()
-    {
-        return this.selected;
-    }
+    public boolean isSelected() { return parent.getSelectedUnit() == this; }
 
     /**
      * Set Unit as selected.
      */
     public void select()
     {
-        this.selected = true;
+        parent.select(this);
     }
 
     /**
@@ -109,7 +104,7 @@ public class Unit {
      */
     public void deselect()
     {
-        this.selected = false;
+        parent.select(null);
     }
 
     public int getRadius()
@@ -125,4 +120,16 @@ public class Unit {
     public void update() {}
 
     public void draw(Graphics2D g) {}
+
+    public boolean intersects(double x, double y) {
+        double diffX = x - getPosition().getX();
+        double diffY = y - getPosition().getY();
+        return Math.sqrt(diffX * diffX + diffY * diffY) < getRadius();
+    }
+
+    public boolean intersects(Unit unit) {
+        double diffX = unit.getPosition().getX() - getPosition().getX();
+        double diffY = unit.getPosition().getY() - getPosition().getY();
+        return Math.sqrt(diffX * diffX + diffY * diffY) < unit.getRadius() + getRadius();
+    }
 }

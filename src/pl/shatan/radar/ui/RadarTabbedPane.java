@@ -3,6 +3,7 @@ package pl.shatan.radar.ui;
 import pl.shatan.radar.ui.listeners.AddAirUnitListener;
 
 import javax.swing.*;
+import javax.xml.soap.Text;
 import java.awt.*;
 
 public class RadarTabbedPane extends JTabbedPane {
@@ -21,6 +22,8 @@ public class RadarTabbedPane extends JTabbedPane {
     private JTextField groundUnitX;
     private JTextField groundUnitY;
     private JTextField groundUnitZ;
+
+    private JTextArea unitInfo;
 
     public RadarTabbedPane(RadarGUI frame)
     {
@@ -47,6 +50,7 @@ public class RadarTabbedPane extends JTabbedPane {
         this.unitInfoPanel = new JPanel();
 
         this.initAirUnitsPanel();
+        this.initUnitInfoPanel();
 
         this.add("Air Units", this.airUnitsPanel);
         this.add("Ground Units", this.groundUnitsPanel);
@@ -55,7 +59,7 @@ public class RadarTabbedPane extends JTabbedPane {
 
     private void initAirUnitsPanel()
     {
-        this.airUnitsPanel.setLayout(new GridLayout(4, 15, 100, 50));
+//        this.airUnitsPanel.setLayout(new GridLayout(10, 15, 0, 30));
         this.airUnitX = new JTextField("X", 1);
         this.airUnitY = new JTextField("Y", 1);
         this.airUnitZ = new JTextField("Z", 1);
@@ -74,6 +78,13 @@ public class RadarTabbedPane extends JTabbedPane {
     {
 
 
+    }
+
+    private void initUnitInfoPanel()
+    {
+        this.unitInfo = new JTextArea(8, 25);
+        this.unitInfo.setText(radarFrame.getName());
+        this.unitInfoPanel.add(this.unitInfo);
     }
 
 }

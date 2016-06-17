@@ -28,13 +28,10 @@ public class AddGroundUnitListener implements ActionListener {
         if(e.getSource() == this.addAirUnitButton) {
             Radar radar = radarFrame.getRadarInstance();
 
-            double x = Math.random() * radarFrame.getWidth(),
-                    y = Math.random() * radarFrame.getHeight(),
-                    z = 0;
+            double  x = Math.random() * radarFrame.getWidth(),
+                    y = Math.random() * radarFrame.getHeight();
 
-            GroundUnit unit = new GroundUnit(x, y);
-
-            radar.addUnit(unit);
+            radarFrame.getRadarInstance().spawnGroundUnit(x, y);
         }
     }
 }

@@ -40,20 +40,20 @@ public class AirUnit extends Unit {
 
     private ArrayList<Command> commands = new ArrayList<>();
 
-    public AirUnit()
+    public AirUnit(Radar radar)
     {
+        this(radar, 0, 0);
+    }
+
+    public AirUnit(Radar radar, double x, double y)
+    {
+        super(radar, x, y);
         this.direction = 0;
         this.targetDirection = 0;
         this.baseDirection = 0;
         this.speed = 1.5;
         this.setRadius(50);
         this.deltaSpeed = 0;
-    }
-
-    public AirUnit(double x, double y, double z)
-    {
-        this();
-        this.setPosition(x, y, z);
     }
 
     /**
@@ -107,8 +107,8 @@ public class AirUnit extends Unit {
         LineMetrics lineMetrics = g.getFont().getLineMetrics(this.FLIGHTER_ICON, fontRenderContext);
         float realHeight = fontMetrics.getMaxAscent() - 8;
 
-        g.translate((int) getPosition().getX(), (int) getPosition().getY());
-        g.rotate(Math.toRadians(getDirection()));
+        g.translate((int) this.getPosition().getX(), (int) this.getPosition().getY());
+        g.rotate(Math.toRadians(this.getDirection()));
 
         // Sets the color to pink if unit is selected.
         if(this.isSelected()) {
@@ -117,12 +117,11 @@ public class AirUnit extends Unit {
         else {
             g.setColor(Color.white);
         }
-
         g.drawString(this.FLIGHTER_ICON, -fontMetrics.charWidth(this.FLIGHTER_CHAR) / 2, realHeight / 2);
         // temporary red dot, is a center point of airplane
         g.setColor(Color.red);
         g.drawOval(-1, -1, 2, 2);
-//        g.drawOval(-this.getRadius()/2, -this.getRadius()/2, this.getRadius(), this.getRadius());
+        g.drawOval(-this.getRadius() / 2, -this.getRadius() / 2, this.getRadius(), this.getRadius());
         g.setTransform(defaultTransform);
     }
 
@@ -139,18 +138,20 @@ public class AirUnit extends Unit {
 
     public static AirUnit createRandomAtPosition(double x, double y, double z)
     {
-        AirUnit unit = new AirUnit(x, y, z);
-        unit.setSpeed(Math.random() * AirUnit.maxSpeed);
-        unit.setDirection(Math.random() * AirUnit.maxDirection);
-
-        return unit;
+//        AirUnit unit = new AirUnit(x, y, z);
+//        unit.setSpeed(Math.random() * AirUnit.maxSpeed);
+//        unit.setDirection(Math.random() * AirUnit.maxDirection);
+//
+//        return unit;
+        return null;
     }
 
     public void interpolateDirection()
     {
         final double deltaTime = 1000.0 / 20.0;
         direction += (targetDirection - baseDirection) / deltaTime;
-        System.out.println("Direction: " + direction + " target: " + targetDirection + " base: " + baseDirection);
+//        System.out.println("Direction: " + direction + " target: " + targetDirection + " base: " + baseDirection);
+
         if(targetDirection - direction < 0.01) {
             direction = targetDirection;
             baseDirection = direction;

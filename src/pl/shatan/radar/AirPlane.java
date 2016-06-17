@@ -5,4 +5,12 @@ package pl.shatan.radar;
  */
 public class AirPlane extends AirUnit {
     private int capacity;
+
+    public AirPlane(Radar radar) {
+        super(radar);
+    }
+
+    public AirPlane(Radar parent, double x, double y) {
+        super(parent, x, y);
+    }
 }
