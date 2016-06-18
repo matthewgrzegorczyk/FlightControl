@@ -71,7 +71,12 @@ public class RadarPanel extends JPanel {
         this.frames++;
 
         for (Unit unit : radar.getUnits()) {
-            unit.update();
+            if (radar.getSelectedUnit() == unit && radar.isUnitDragActive()) {
+                // Stop moving object.
+            }
+            else {
+                unit.update();
+            }
         }
         for (Unit unit : radar.getUnits()) {
             unit.draw(g2d);

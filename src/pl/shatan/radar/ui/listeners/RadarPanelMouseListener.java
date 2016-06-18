@@ -56,6 +56,8 @@ public class RadarPanelMouseListener implements MouseListener {
             menu.show(e.getComponent(), e.getX(), e.getY());
         }
         this.selectUnitOnMouseEvent(e);
+        RadarGUI radarGUI = (RadarGUI) SwingUtilities.getWindowAncestor(this.radarPanel);
+        radarGUI.getRadarInstance().stopUnitDrag();
     }
 
     /**

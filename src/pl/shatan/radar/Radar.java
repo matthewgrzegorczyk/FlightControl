@@ -17,6 +17,7 @@ public class Radar {
     private ArrayList<Unit> units;
 
     private Unit selectedUnit;
+    private boolean unitDrag = false;
 
     /**
      * Default constructor with 100 units and default Radar name.
@@ -54,7 +55,24 @@ public class Radar {
         return unit;
     }
 
-    public Unit getSelectedUnit() { return selectedUnit; }
+    public Unit getSelectedUnit()
+    {
+        return selectedUnit;
+    }
+
+    public boolean isUnitDragActive()
+    {
+        return this.unitDrag;
+    }
+
+    public void startUnitDrag() {
+        this.unitDrag = true;
+    }
+
+    public void stopUnitDrag()
+    {
+        this.unitDrag = false;
+    }
 
     /**
      * Gets units which are on the radar.

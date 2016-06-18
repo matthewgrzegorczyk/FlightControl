@@ -99,9 +99,9 @@ public class AirUnit extends Unit {
         for(Command command : commands) {
             command.execute(this);
         }
-        commands.clear();
-        interpolateDirection();
-        move();
+        this.commands.clear();
+        this.interpolateDirection();
+        this.move();
     }
 
     @Override
@@ -117,10 +117,10 @@ public class AirUnit extends Unit {
 
         // Sets the color to pink if unit is selected.
         if(this.isSelected()) {
-            g.setColor(Color.pink);
+            g.setColor(Color.GREEN);
         }
         else {
-            g.setColor(Color.white);
+            g.setColor(Color.WHITE);
         }
         g.drawString(this.FLIGHTER_ICON, -fontMetrics.charWidth(this.FLIGHTER_CHAR) / 2, realHeight / 2);
         // temporary red dot, is a center point of airplane
@@ -163,7 +163,12 @@ public class AirUnit extends Unit {
         }
     }
 
-    public boolean detectCollision(Unit unit) {
-        return (this.getRadius() + unit.getRadius()) <= this.distance(unit);
+    public boolean detectCollision(ArrayList<Unit> units) {
+        for (Unit unit : units) {
+            if ((this.getRadius() + unit.getRadius()) <= this.distance(unit)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

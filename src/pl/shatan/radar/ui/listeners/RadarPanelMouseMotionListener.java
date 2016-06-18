@@ -47,11 +47,16 @@ public class RadarPanelMouseMotionListener implements MouseMotionListener {
 //        System.out.println(e);
     }
 
+    /**
+     * Drags selected unit.
+     * @param e
+     */
     public void dragUnitOnMouseEvent(MouseEvent e) {
         if (e.getSource() == this.radarPanel) {
             RadarGUI radarGUI = (RadarGUI) SwingUtilities.getWindowAncestor(this.radarPanel);
-            AirUnit unit = (AirUnit) radarGUI.getRadarInstance().getSelectedUnit();
+            Unit unit = radarGUI.getRadarInstance().getSelectedUnit();
             if (unit != null) {
+                radarGUI.getRadarInstance().startUnitDrag();
                 unit.setPosition(e.getX(), e.getY(), 0);
             }
         }
