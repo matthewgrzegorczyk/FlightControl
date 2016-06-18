@@ -8,7 +8,8 @@ public class MainLoop implements Runnable
 {
 	private JFrame parent;
 
-	public MainLoop(JFrame parent) {
+	public MainLoop(JFrame parent)
+	{
 		this.parent = parent;
 	}
 

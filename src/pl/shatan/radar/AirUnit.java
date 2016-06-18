@@ -85,7 +85,10 @@ public class AirUnit extends Unit {
         return speed;
     }
 
-    public void setSpeed(double speed) { this.deltaSpeed = speed - this.speed; }
+    public void setSpeed(double speed)
+    {
+        this.speed = speed;
+    }
 
     public void addCommand(Command command) {
         commands.add(command);

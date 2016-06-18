@@ -103,8 +103,8 @@ public class RadarGUI extends JFrame {
         this.add(radarPanel, BorderLayout.CENTER);
 
         this.radarTabbedPane = new RadarTabbedPane(this);
+        this.radarTabbedPane.setPreferredSize(new Dimension(400, 0));
         this.add(radarTabbedPane, BorderLayout.EAST);
-        radarTabbedPane.setMinimumSize(new Dimension(400, 200));
 
 
         // Draw loop.

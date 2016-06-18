@@ -3,6 +3,7 @@ package pl.shatan.radar.ui;
 import pl.shatan.radar.Unit;
 import pl.shatan.radar.commands.ChangeDirectionCommand;
 import pl.shatan.radar.ui.listeners.AddAirUnitListener;
+import pl.shatan.radar.ui.listeners.SubmitOnEnterKeyListener;
 import pl.shatan.radar.ui.listeners.UnitChangeDirectionListener;
 import pl.shatan.radar.ui.listeners.UnitChangeSpeedListener;
 
@@ -88,7 +89,8 @@ public class RadarTabbedPane extends JTabbedPane {
 
     private void initUnitInfoPanel()
     {
-        this.unitInfoPanel.setLayout(new GridLayout(10, 20, 0, 30));
+//        this.unitInfoPanel.setLayout(new GridLayout(30, 1, 0, 0));
+        this.unitInfoPanel.setLayout(null);
         this.unitInfo = new JTextArea(8, 25);
         this.unitInfo.setLineWrap(true);
         this.unitInfo.setText("No Unit selected.");
@@ -98,9 +100,29 @@ public class RadarTabbedPane extends JTabbedPane {
 
         // Button initializations.
         this.unitChangeDirectionButton = new JButton("Change direction");
+        this.unitDirectionAngle.addKeyListener(new SubmitOnEnterKeyListener(this.unitDirectionAngle, this.unitChangeDirectionButton));
         this.unitChangeDirectionButton.addActionListener(new UnitChangeDirectionListener(this.unitChangeDirectionButton, this.radarFrame, this.unitDirectionAngle));
+
         this.unitChangeSpeedButton = new JButton("Change speed");
+        this.unitSpeed.addKeyListener(new SubmitOnEnterKeyListener(this.unitSpeed, this.unitChangeSpeedButton));
         this.unitChangeSpeedButton.addActionListener(new UnitChangeSpeedListener(this.unitChangeSpeedButton, this.radarFrame, this.unitSpeed));
+
+
+        // Positioning and styling of form items.
+        Insets margin5px = new Insets(5, 5, 5, 5);
+        // Row 1.
+        this.unitInfo.setBounds(15, 15, 370, 100);
+
+        // Row 2.
+        this.unitInfo.setMargin(margin5px);
+        this.unitDirectionAngle.setBounds(15, 130, 180, 30);
+        this.unitDirectionAngle.setMargin(margin5px);
+        this.unitChangeDirectionButton.setBounds(220, 130, 180, 30);
+
+        // Row 3.
+        this.unitSpeed.setBounds(15, 175, 180, 30);
+        this.unitSpeed.setMargin(margin5px);
+        this.unitChangeSpeedButton.setBounds(220, 175, 180, 30);
 
         // Adding forms to the panel.
         this.unitInfoPanel.add(this.unitInfo);

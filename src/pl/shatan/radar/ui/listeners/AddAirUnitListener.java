@@ -49,7 +49,7 @@ public class AddAirUnitListener implements ActionListener {
 
         if (e.getSource() == this.addAirUnitMenuItem) {
             Radar radar = radarFrame.getRadarInstance();
-            AirUnit unit = radar.spawnAirplane(x, y);
+            AirUnit unit = radar.spawnAirplane(this.x, this.y);
             System.out.println(unit);
         }
     }
