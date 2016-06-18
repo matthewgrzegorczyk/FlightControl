@@ -1,7 +1,11 @@
 package pl.shatan.radar.ui.listeners;
 
+import pl.shatan.radar.AirUnit;
+import pl.shatan.radar.Unit;
+import pl.shatan.radar.ui.RadarGUI;
 import pl.shatan.radar.ui.RadarPanel;
 
+import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
@@ -29,6 +33,7 @@ public class RadarPanelMouseMotionListener implements MouseMotionListener {
     @Override
     public void mouseDragged(MouseEvent e) {
 //        System.out.println(e);
+        this.dragUnitOnMouseEvent(e);
     }
 
     /**
@@ -40,5 +45,15 @@ public class RadarPanelMouseMotionListener implements MouseMotionListener {
     @Override
     public void mouseMoved(MouseEvent e) {
 //        System.out.println(e);
+    }
+
+    public void dragUnitOnMouseEvent(MouseEvent e) {
+        if (e.getSource() == this.radarPanel) {
+            RadarGUI radarGUI = (RadarGUI) SwingUtilities.getWindowAncestor(this.radarPanel);
+            AirUnit unit = (AirUnit) radarGUI.getRadarInstance().getSelectedUnit();
+            if (unit != null) {
+                unit.setPosition(e.getX(), e.getY(), 0);
+            }
+        }
     }
 }

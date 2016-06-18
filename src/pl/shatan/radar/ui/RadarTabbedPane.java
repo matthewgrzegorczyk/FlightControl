@@ -2,10 +2,7 @@ package pl.shatan.radar.ui;
 
 import pl.shatan.radar.Unit;
 import pl.shatan.radar.commands.ChangeDirectionCommand;
-import pl.shatan.radar.ui.listeners.AddAirUnitListener;
-import pl.shatan.radar.ui.listeners.SubmitOnEnterKeyListener;
-import pl.shatan.radar.ui.listeners.UnitChangeDirectionListener;
-import pl.shatan.radar.ui.listeners.UnitChangeSpeedListener;
+import pl.shatan.radar.ui.listeners.*;
 
 import javax.swing.*;
 import javax.xml.soap.Text;
@@ -26,11 +23,12 @@ public class RadarTabbedPane extends JTabbedPane {
 
     private JTextField groundUnitX;
     private JTextField groundUnitY;
-    private JTextField groundUnitZ;
 
+    private JTextField groundUnitZ;
     private JTextArea unitInfo;
     private JButton unitChangeDirectionButton;
     private JButton unitChangeSpeedButton;
+    private JButton deleteUnitButton;
     private JTextField unitDirectionAngle;
     private JTextField unitSpeed;
 
@@ -107,22 +105,29 @@ public class RadarTabbedPane extends JTabbedPane {
         this.unitSpeed.addKeyListener(new SubmitOnEnterKeyListener(this.unitSpeed, this.unitChangeSpeedButton));
         this.unitChangeSpeedButton.addActionListener(new UnitChangeSpeedListener(this.unitChangeSpeedButton, this.radarFrame, this.unitSpeed));
 
+        this.deleteUnitButton = new JButton("Delete unit");
+        this.deleteUnitButton.addActionListener(new DeleteUnitListener(this.deleteUnitButton, this.radarFrame));
+
 
         // Positioning and styling of form items.
         Insets margin5px = new Insets(5, 5, 5, 5);
         // Row 1.
-        this.unitInfo.setBounds(15, 15, 370, 100);
+        this.unitInfo.setBounds(10, 15, 380, 100);
 
         // Row 2.
         this.unitInfo.setMargin(margin5px);
-        this.unitDirectionAngle.setBounds(15, 130, 180, 30);
+        this.unitDirectionAngle.setBounds(10, 130, 180, 30);
         this.unitDirectionAngle.setMargin(margin5px);
-        this.unitChangeDirectionButton.setBounds(220, 130, 180, 30);
+        this.unitChangeDirectionButton.setBounds(210, 130, 180, 30);
 
         // Row 3.
-        this.unitSpeed.setBounds(15, 175, 180, 30);
+        this.unitSpeed.setBounds(10, 175, 180, 30);
         this.unitSpeed.setMargin(margin5px);
-        this.unitChangeSpeedButton.setBounds(220, 175, 180, 30);
+        this.unitChangeSpeedButton.setBounds(210, 175, 180, 30);
+
+        // Row 4.
+        this.deleteUnitButton.setBounds(10, 220, 380, 30);
+        this.deleteUnitButton.setBackground(Color.RED);
 
         // Adding forms to the panel.
         this.unitInfoPanel.add(this.unitInfo);
@@ -130,6 +135,7 @@ public class RadarTabbedPane extends JTabbedPane {
         this.unitInfoPanel.add(unitChangeDirectionButton);
         this.unitInfoPanel.add(this.unitSpeed);
         this.unitInfoPanel.add(this.unitChangeSpeedButton);
+        this.unitInfoPanel.add(this.deleteUnitButton);
     }
 
     public void updateSelectedUnitInfo()

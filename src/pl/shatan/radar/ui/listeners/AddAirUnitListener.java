@@ -44,13 +44,13 @@ public class AddAirUnitListener implements ActionListener {
                     z = 0;
 
             AirUnit unit = radar.spawnAirplane(x, y);
-            unit.setDirection(Math.random());
+            unit.setDirection(Math.random() * 360);
         }
 
         if (e.getSource() == this.addAirUnitMenuItem) {
             Radar radar = radarFrame.getRadarInstance();
             AirUnit unit = radar.spawnAirplane(this.x, this.y);
-            System.out.println(unit);
+            unit.setDirection(Math.random() * 360);
         }
     }
 }

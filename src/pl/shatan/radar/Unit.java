@@ -25,7 +25,6 @@ public class Unit {
      * Unit constructor with setting position at points x, y, z.
      * @param x
      * @param y
-     * @param z
      */
     public Unit(Radar parent, double x, double y)
     {
@@ -45,7 +44,7 @@ public class Unit {
     public String position(boolean textarea) {
         String output = "";
         if (textarea == true) {
-            output += "Position at X: " + this.point.getX() + " Y: " + this.point.getY() + " Z: " + this.point.getZ();
+            output += "X: " + this.point.getX() + "\nY: " + this.point.getY() + "\nZ: " + this.point.getZ();
         }
         return output;
     }

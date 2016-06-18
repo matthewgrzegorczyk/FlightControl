@@ -82,6 +82,7 @@ public class RadarGUI extends JFrame {
         // Basic Frame settings.
         this.setTitle("Flight Control");
         this.setSize(this.rWidth, this.rHeight);
+        this.setMinimumSize(new Dimension(this.rWidth, this.rHeight));
         this.setLayout(new BorderLayout());
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
